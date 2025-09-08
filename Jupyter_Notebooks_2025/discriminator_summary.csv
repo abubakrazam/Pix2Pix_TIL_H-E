@@ -1,0 +1,13 @@
+Layer Name,Layer Type,Output Shape,Params,Connected to
+input_image,InputLayer,"[(None, 256, 256, 3)]",0,
+target_image,InputLayer,"[(None, 256, 256, 3)]",0,
+concatenate_7,Concatenate,"(None, 256, 256, 6)",0,input_image[0][0]; Target_image[0][0]
+sequential_17,Sequential,"(None, 128, 128, 64)",6144,Concatenate_7[0][0]
+sequential_18,Sequential,"(None, 64, 64, 128)",131584,Sequential_17[0][0]
+sequential_19,Sequential,"(None, 32, 32, 256)",525312,Sequential_18[0][0]
+zero_padding2d,ZeroPadding2D,"(None, 34, 34, 256)",0,Sequential_19[0][0]
+conv2d_12,Conv2D,"(None, 31, 31, 512)",2097152,zero_padding2d[0][0]
+batch_normalization_18,BatchNormalization,"(None, 31, 31, 512)",2048,conv2d_12[0][0]
+leaky_re_lu_12,LeakyReLU,"(None, 31, 31, 512)",0,batch_normalization_18[0][0]
+zero_padding2d_1,ZeroPadding2D,"(None, 33, 33, 512)",0,leaky_re_lu_12[0][0]
+conv2d_13,Conv2D,"(None, 30, 30, 1)",8193,zero_padding2d_1[0][0]
